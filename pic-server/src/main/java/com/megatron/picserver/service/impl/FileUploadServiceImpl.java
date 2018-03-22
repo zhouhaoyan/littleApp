@@ -26,14 +26,13 @@ import java.util.Map;
 public class FileUploadServiceImpl implements FileUploadService {
     Logger logger = LoggerFactory.getLogger(FileUploadService.class);
 
-    @Value("${IMAGE_PATH}")
-    private String imagePath;
+
 
     @Autowired
     private ResourcesService resourcesService;
 
     @Override
-    public boolean upload(MultipartFile file, String fileName, String imagePath, Long userId) throws Exception {
+    public Map<String,Object> upload(MultipartFile file, String fileName, String imagePath, Long userId) throws Exception {
         logger.debug("开始上传文件");
         BufferedOutputStream stream = null;
 
@@ -55,7 +54,6 @@ public class FileUploadServiceImpl implements FileUploadService {
 
                 String ext;
                 if (fname.lastIndexOf(".") > 0) {
-                    fileName = fname.substring(0, fname.lastIndexOf("."));
                     ext = fname.substring(fname.lastIndexOf(".") + 1, fname.length());
                 } else {
                     ext = "";
@@ -63,7 +61,7 @@ public class FileUploadServiceImpl implements FileUploadService {
                 fname = "." + ext;
                 fname = System.currentTimeMillis() + RandomUtil.random(6) + fname;
 
-                stream = new BufferedOutputStream(new FileOutputStream(savePath + fname));
+                stream = new BufferedOutputStream(new FileOutputStream(savePath + "/"+fname));
                 byte[] bytes = file.getBytes();
                 stream.write(bytes, 0, bytes.length);
 
@@ -72,7 +70,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                return null;
             } finally {
                 try {
                     if (stream != null) {
@@ -83,12 +81,10 @@ public class FileUploadServiceImpl implements FileUploadService {
                 }
             }
         } else {
-            return false;
+            return null;
         }
 
-
-
-        return true;
+        return resMap;
     }
 
 }

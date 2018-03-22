@@ -37,7 +37,7 @@ public class ResourcesController {
     @PostMapping(value = "image/add")
     public Result addVideo(
             @RequestParam(value = "title") String title,
-            @RequestParam(value = "url") String url,
+            @RequestParam(value = "key") String key,
             @RequestParam(value = "fileName") String fileName,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "lables") List<String> lables,
@@ -47,13 +47,13 @@ public class ResourcesController {
 
     ) throws IOException {
 
-        return new Result(resourcesService.add(title,Const.IMAGE_TYPE,url,fileName,description,lables,classifyId,1L,isTop));
+        return new Result(resourcesService.add(title,Const.IMAGE_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
 
     }
     @ApiOperation(value = "新增视频", notes = "调用该方法新增视频")
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "title", value = "标题", paramType = "query", dataType = "String", required = true),
-            @ApiImplicitParam(name = "url", value = "视频地址", paramType = "query", dataType = "String", required = true),
+            @ApiImplicitParam(name = "key", value = "视频地址", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "fileName", value = "视频名称", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "description", value = "描述", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "lables", value = "标签", paramType = "query", dataType = "String", required = true),
@@ -63,7 +63,7 @@ public class ResourcesController {
     @PostMapping(value = "video/add")
     public Result addImage(
             @RequestParam(value = "title") String title,
-            @RequestParam(value = "url") String url,
+            @RequestParam(value = "key") String key,
             @RequestParam(value = "fileName") String fileName,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "lables") List<String> lables,
@@ -73,16 +73,15 @@ public class ResourcesController {
 
     ) throws IOException {
 
-        return new Result(resourcesService.add(title,Const.VIDEO_TYPE,url,fileName,description,lables,classifyId,1L,isTop));
+        return new Result(resourcesService.add(title,Const.VIDEO_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
 
     }
 
 
-    @ApiOperation(value = "维护图片", notes = "调用该方法维护图片,原则上不建议维护url")
+    @ApiOperation(value = "维护图片", notes = "调用该方法维护图片")
     @ApiImplicitParams(value = {
             @ApiImplicitParam(name = "id", value = "ID", paramType = "query", dataType = "Integer", required = true),
             @ApiImplicitParam(name = "title", value = "标题", paramType = "query", dataType = "String", required = true),
-            @ApiImplicitParam(name = "url", value = "图片地址", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "fileName", value = "图片名称", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "description", value = "描述", paramType = "query", dataType = "String", required = true),
             @ApiImplicitParam(name = "lables", value = "标签", paramType = "query", dataType = "String", required = true),
@@ -94,7 +93,6 @@ public class ResourcesController {
             @RequestParam(value = "id") Long id,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "type") Integer type,
-            @RequestParam(value = "url") String url,
             @RequestParam(value = "fileName") String fileName,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "lables",required = false) List<String> lables,
@@ -104,7 +102,7 @@ public class ResourcesController {
 
     ) throws IOException {
 
-        return new Result(resourcesService.update(id,title,null,url,description,lables,classifyId,1L,isTop));
+        return new Result(resourcesService.update(id,title,null,null,description,lables,classifyId,1L,isTop));
 
     }
 
@@ -177,6 +175,7 @@ public class ResourcesController {
     ){
         return new Result(resourcesService.getPageByType(Const.VIDEO_TYPE,pageSize,pageNo));
     }
+
 
 
 

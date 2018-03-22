@@ -1,5 +1,6 @@
 package com.megatron.picserver;
 
+import com.google.gson.Gson;
 import com.megatron.picserver.utils.UploadUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,12 @@ public class PicServerApplication {
 	@Bean
 	public UploadUtil uploadUtil(){
 		return new UploadUtil();
+	}
+
+	@Bean
+	public Gson gson(){
+		return new Gson();
+
 	}
 }
 

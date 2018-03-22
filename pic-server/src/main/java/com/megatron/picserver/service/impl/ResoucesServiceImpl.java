@@ -10,6 +10,7 @@ import com.megatron.picserver.utils.base.BaseDao;
 import com.megatron.picserver.utils.base.PageBean;
 import com.megatron.picserver.utils.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Service(value = "ResourcesService")
 @Transactional
@@ -28,6 +28,9 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
 
     @Autowired
     private UploadUtil uploadUtil;
+
+    @Value("${file.server.path}")
+    private String fileServerPath;
 
     @Override
     public PageBean<Resources> getRecommendPage(Integer type,Integer pageSize, Integer pageNo) {
@@ -51,7 +54,7 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
 
     @Override
     public Resources add(String title, Integer type, String url,String fileName, String description, List<String> lables, Long classify, Long userId, Integer isTop) throws IOException {
-        Resources resources=Resources.builder().title(title).type(type).url(url)
+        Resources resources=Resources.builder().title(title).type(type).url(this.buildFileUrlFromKey(url))
                 .description(description).
                         lables(lables.toString()).classifyId(classify).userId(userId).isTop(isTop).build();
 
@@ -70,7 +73,7 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
     @Override
     public Resources update(Long id, String title, Integer type, String url, String description, List<String> lables, Long classify, Long userId, Integer isTop) {
 
-        Resources resources=Resources.builder().title(title).type(type).url(url)
+        Resources resources=Resources.builder().title(title).type(type).url(this.buildFileUrlFromKey(url))
                 .description(description).
                         lables(lables.toString()).classifyId(classify).userId(userId).isTop(isTop).build();
 
@@ -105,6 +108,12 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
         return page;
 
 
+    }
+
+
+    private String buildFileUrlFromKey(String key){
+
+            return fileServerPath+"/"+key;
     }
 
 }
