@@ -40,6 +40,8 @@ public class Resources {
 
     private Integer isTop;
 
+    private Long albumId;
+
     @Tolerate
     public Resources(){}
 }

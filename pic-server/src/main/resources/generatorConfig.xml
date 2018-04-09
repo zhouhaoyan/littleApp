@@ -45,19 +45,12 @@
 
 
         <!-- 配置表信息，每生成一张表，这里需要改变一次对应表名，若单次生成多张表，则需要配置多个<table>标签 -->
-        <table schema="megatron_pic" tableName="follow_rel"
-               domainObjectName="FollowRel" enableCountByExample="false"
+        <table schema="megatron_pic" tableName="album"
+               domainObjectName="Album" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
 
-
-        <!-- 配置表信息，每生成一张表，这里需要改变一次对应表名，若单次生成多张表，则需要配置多个<table>标签 -->
-        <table schema="megatron_pic" tableName="classify"
-               domainObjectName="Classify" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
-        </table>
 
 
 

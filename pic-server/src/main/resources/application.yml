@@ -8,9 +8,9 @@ spring:
 #thymeleaf end
   datasource:
        name: task
-       url: jdbc:mysql://47.104.142.33:3306/megatron_pic
-       username: root
-       password: Ttzhy18500747570#
+       url: jdbc:mysql://127.0.0.1:3306/megatron_pic
+       username:
+       password:
        # 使用druid数据源
        type: com.alibaba.druid.pool.DruidDataSource
        driver-class-name: com.mysql.jdbc.Driver
@@ -39,9 +39,15 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.megatron.picserver.pojo
 
-IMAGE_PATH: D:\file\
+#IMAGE_PATH: D:\file\
+IMAGE_PATH: /data/temp
 
 file.server.path: oxllb2jb0.bkt.clouddn.com
+
+
+appId:
+
+secret:
 
 
 

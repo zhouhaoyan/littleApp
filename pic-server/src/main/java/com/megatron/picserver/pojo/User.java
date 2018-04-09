@@ -11,7 +11,7 @@ import java.util.Date;
 public class User {
     private Long id;
 
-    private Long openId;
+    private String openId;
 
     private String name;
 

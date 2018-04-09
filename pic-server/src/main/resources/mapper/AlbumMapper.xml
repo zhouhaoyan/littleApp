@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megatron.picserver.dao.AlbumDao" >
+  <resultMap id="BaseResultMap" type="com.megatron.picserver.pojo.Album" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="is_banner" property="isBanner" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="classify_id" property="classifyId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="follow_num" property="followNum" jdbcType="INTEGER" />
+    <result column="view_num" property="viewNum" jdbcType="INTEGER" />
+    <result column="lables" property="lables" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, title, url, is_top, is_banner, user_id, classify_id, description, follow_num, 
+    view_num, lables, create_by, create_time, update_time, status
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from album
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from album
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="save" parameterType="com.megatron.picserver.pojo.Album" keyProperty="id" useGeneratedKeys="true" >
+    insert into album
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="isBanner != null" >
+        is_banner,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="classifyId != null" >
+        classify_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="followNum != null" >
+        follow_num,
+      </if>
+      <if test="viewNum != null" >
+        view_num,
+      </if>
+      <if test="lables != null" >
+        lables,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="isBanner != null" >
+        #{isBanner,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="classifyId != null" >
+        #{classifyId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="followNum != null" >
+        #{followNum,jdbcType=INTEGER},
+      </if>
+      <if test="viewNum != null" >
+        #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="lables != null" >
+        #{lables,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.megatron.picserver.pojo.Album" >
+    update album
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="isBanner != null" >
+        is_banner = #{isBanner,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="classifyId != null" >
+        classify_id = #{classifyId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="followNum != null" >
+        follow_num = #{followNum,jdbcType=INTEGER},
+      </if>
+      <if test="viewNum != null" >
+        view_num = #{viewNum,jdbcType=INTEGER},
+      </if>
+      <if test="lables != null" >
+        lables = #{lables,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from album
+    <where>
+      <include refid="ConditionsSql"/>
+    </where>
+  </select>
+
+  <sql id="ConditionsSql">
+    <if test="isTop != null ">
+      is_top =#{isTop,jdbcType=INTEGER}
+    </if>
+
+    <if test="isBanner != null ">
+      is_banner =#{isBanner,jdbcType=INTEGER}
+    </if>
+
+    <if test="classifyId != null ">
+      and classify_id =#{classifyId,jdbcType=INTEGER}
+    </if>
+    <if test="type != null ">
+      and  type =#{type,jdbcType=INTEGER}
+    </if>
+    <if test="status != null ">
+      and status =#{status,jdbcType=INTEGER}
+    </if>
+  </sql>
+</mapper>

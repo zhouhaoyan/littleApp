@@ -47,7 +47,7 @@ public class ResourcesController {
 
     ) throws IOException {
 
-        return new Result(resourcesService.add(title,Const.IMAGE_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
+        return new Result(resourcesService.add(null,title,Const.IMAGE_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
 
     }
     @ApiOperation(value = "新增视频", notes = "调用该方法新增视频")
@@ -73,7 +73,7 @@ public class ResourcesController {
 
     ) throws IOException {
 
-        return new Result(resourcesService.add(title,Const.VIDEO_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
+        return new Result(resourcesService.add(null,title,Const.VIDEO_TYPE,key,fileName,description,lables,classifyId,1L,isTop));
 
     }
 
@@ -168,6 +168,8 @@ public class ResourcesController {
             @ApiImplicitParam(name = "pageSize", value = "每页显示数量", paramType = "query", dataType = "Integer", defaultValue = "10",required = true),
             @ApiImplicitParam(name = "pageNo", value = "页码", paramType = "query", dataType = "Integer" ,defaultValue = "0", required = true),
     })
+
+
     @GetMapping("viedeoPage")
     public Result viedeoPage(
             @RequestParam(value = "pageSize") Integer pageSize,
@@ -175,6 +177,17 @@ public class ResourcesController {
     ){
         return new Result(resourcesService.getPageByType(Const.VIDEO_TYPE,pageSize,pageNo));
     }
+
+
+    @GetMapping("albumPage")
+    public Result albumPage(@RequestParam(value = "albumId") Long albumId,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            @RequestParam(value = "pageNo") Integer pageNo
+    ){
+        return new Result(resourcesService.getPageByAlbumId(albumId,pageSize,pageNo));
+    }
+
+
 
 
 

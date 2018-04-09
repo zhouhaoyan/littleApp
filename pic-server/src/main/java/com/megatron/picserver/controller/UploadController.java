@@ -1,6 +1,7 @@
 package com.megatron.picserver.controller;
 
 import com.google.gson.Gson;
+
 import com.megatron.picserver.service.FileUploadService;
 import com.megatron.picserver.utils.UploadUtil;
 import com.megatron.picserver.utils.base.Result;
@@ -11,10 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -53,6 +52,12 @@ public class UploadController {
 }
 
 
+    @ApiOperation(value = "获取上传凭证", notes = "前端直接上传至七牛云存储时所需要的上传凭证请求接口")
+    @GetMapping("uploadToken")
+    public String getToken()  {
+            return uploadUtil.getUpToken();
+
+    }
 
 }
 

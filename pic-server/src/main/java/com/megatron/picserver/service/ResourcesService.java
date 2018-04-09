@@ -54,7 +54,7 @@ public interface ResourcesService extends BaseService<Resources,Long> {
      * @param isTop
      * @return
      */
-    Resources add(String title, Integer type, String url,String fileName, String description, List<String> lables,Long classifyId,Long userId,Integer isTop) throws IOException;
+    Resources add(Long albumId,String title, Integer type, String url,String fileName, String description, List<String> lables,Long classifyId,Long userId,Integer isTop);
 
     /**
      * 更新资源
@@ -70,6 +70,16 @@ public interface ResourcesService extends BaseService<Resources,Long> {
      * @return
      */
     Resources update(Long id,String title, Integer type, String url, String description, List<String> lables,Long classify,Long userId,Integer isTop);
+
+
+    /**
+     * 根据相册ID获取资源列表
+     * @param albumId
+     * @param pageSize
+     * @param pageNo
+     * @return
+     */
+    PageBean<Resources> getPageByAlbumId(Long albumId,Integer pageSize,Integer pageNo);
 
 
 

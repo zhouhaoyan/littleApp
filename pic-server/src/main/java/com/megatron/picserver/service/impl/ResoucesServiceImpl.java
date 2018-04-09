@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,20 +52,20 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
     }
 
     @Override
-    public Resources add(String title, Integer type, String url,String fileName, String description, List<String> lables, Long classify, Long userId, Integer isTop) throws IOException {
-        Resources resources=Resources.builder().title(title).type(type).url(this.buildFileUrlFromKey(url))
+    public Resources add(Long albumId,String title, Integer type, String url,String fileName, String description, List<String> lables, Long classify, Long userId, Integer isTop) {
+        Resources resources=Resources.builder().title(title).type(type).url(url)
                 .description(description).
-                        lables(lables.toString()).classifyId(classify).userId(userId).isTop(isTop).build();
+                        lables(null).classifyId(classify).userId(userId).isTop(isTop).albumId(albumId).status(Const.STATUS_NORMAL).build();
 
         this.getBaseDao().save(resources);
 
-        try {
-            uploadUtil.upload(url,fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error("上传图片至七牛云失败:本地路径:"+url+"图片名称:"+fileName);
-            throw e;
-        }
+//        try {
+//            uploadUtil.upload(url,fileName);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            logger.error("上传图片至七牛云失败:本地路径:"+url+"图片名称:"+fileName);
+//            throw e;
+//        }
         return resources;
     }
 
@@ -79,6 +78,21 @@ public class ResoucesServiceImpl extends BaseServiceImpl<Resources,Long> impleme
 
         this.getBaseDao().save(resources);
         return null;
+    }
+
+    @Override
+    public PageBean<Resources> getPageByAlbumId(Long albumId, Integer pageSize, Integer pageNo) {
+
+        System.out.println("pageSize:"+pageSize);
+        System.out.println("pageNo:"+pageNo);
+        Map<String, Object> param = new HashMap<String, Object>();
+
+        if (albumId !=null)param.put("albumId", albumId);
+        System.out.println(param.toString());
+        PageHelper.startPage(pageNo, pageSize);
+        List<Resources> list = getBaseDao().findList(param);
+        PageBean<Resources> page = new PageBean<>(list);
+        return page;
     }
 
     @Override
