@@ -1,0 +1,49 @@
+.banner{
+  width: 100%;
+  height: 450rpx;
+
+}
+
+.view-item{
+  display:flex;/*Flex布局*/
+  height: 450rpx;
+  align-items: center;
+  justify-content:center;
+}
+
+.text-title{
+  position: absolute;
+  flex: 100%;
+  color: white;
+  text-shadow: 2px 2px 2px #000000;
+  z-index: 2;
+}
+.img-item{
+  flex: 100%;
+  z-index: 1;
+}
+
+
+
+.scroll-item{
+  display: flex;
+  width: 100%;
+  height: 450rpx;
+    align-items: center;
+  justify-content:center;
+}
+
+/* 滚动条 */
+/* .scroll-view{
+  margin-top: 0.5px;
+  white-space: nowrap;
+  display: flex;
+
+}
+*/
+::-webkit-scrollbar{
+  width: 0;
+  height:0 ;
+  color:transparent;
+} 
+

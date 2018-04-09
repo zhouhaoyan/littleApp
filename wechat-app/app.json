@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/imageList/imageList",
+    "pages/classify/classify",
+    "pages/album/album",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/uploadBatch/upload",
+    "pages/upload/upload",
+    "pages/list/list"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTextStyle": "light",
+    "navigationBarTitleText": "图记",
+    "backgroundColor": "#000000",
+    "backgroundTextStyle": "light",
+    "backgroundColorBottom": "light"
+  },
+  "tabBar": {
+    "color": "#ffffff",
+    "backgroundColor": "#000000",
+    "selectedColor": "#ffffff",
+    "borderStyle": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/imageList/imageList",
+        "text": "推荐"
+      },
+      {
+        "pagePath": "pages/classify/classify",
+        "text": "分类"
+      },
+          {
+            "pagePath": "pages/uploadBatch/upload",
+            "text": "上传"
+          }
+
+    ]
+  }
+}
