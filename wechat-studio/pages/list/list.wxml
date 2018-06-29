@@ -1,0 +1,8 @@
+<view class='scroll-view' style="height: 100%;">
+  <view wx:for="{{imgListKey}}" wx:key="{{item}}">
+    <view class='scroll-item' id='{{item.id}}' bindtap='toAlbumPage'>
+      <image class='img-item' mode='scaleToFill' src='{{item.url}}' />
+      <text class='text-title'>{{item.title}}</text>
+    </view>
+  </view>
+</view>
