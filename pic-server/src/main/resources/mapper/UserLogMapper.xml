@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megatron.picserver.dao.UserLogDao">
+    <resultMap id="BaseResultMap" type="com.megatron.picserver.pojo.UserLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="open_Id" property="openId" jdbcType="VARCHAR"/>
+        <result column="session_key" property="sessionKey" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, open_Id, session_key, create_time
+  </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from user_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from user_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="save" parameterType="com.megatron.picserver.pojo.UserLog" keyProperty="id" useGeneratedKeys="true">
+        insert into user_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="openId != null">
+                open_Id,
+            </if>
+            <if test="sessionKey != null">
+                session_key,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionKey != null">
+                #{sessionKey,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateById" parameterType="com.megatron.picserver.pojo.UserLog">
+        update user_log
+        <set>
+            <if test="openId != null">
+                open_Id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionKey != null">
+                session_key = #{sessionKey,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

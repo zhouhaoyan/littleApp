@@ -27,15 +27,15 @@
     "list": [
       {
         "pagePath": "pages/imageList/imageList",
-        "text": "样片展示"
+        "text": "样  片"
       },
       {
-        "pagePath": "pages/userCenter/userCenter",
-        "text": "产品列表"
+        "pagePath": "pages/classify/classify",
+        "text": "专  辑"
       },
       {
         "pagePath": "pages/uploadBatch/upload",
-        "text": "我的"
+        "text": "上 传"
       }
     ]
   }

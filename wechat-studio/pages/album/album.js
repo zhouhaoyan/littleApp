@@ -172,6 +172,7 @@ Page({
     // });
 
     this.getAlbumImgs(albumId);
+    this.resourceLook(albumId,"ALBUM");
   },
 
   getAlbumImgs: function (albumId){
@@ -184,7 +185,7 @@ Page({
         let resultList=[];
         let urlList=[];
         for(var i=0;i<list.length;i++){
-          resultList.push({ id: baseId+"-"+list[i].id, pic:list[i].url,height:0});
+          resultList.push({ id: baseId+"-test"+list[i].id, pic:list[i].url,height:0,rId:list[i].id});
           urlList.push(list[i].url);
         }
         console.log(resultList);
@@ -196,13 +197,24 @@ Page({
       }
     })
   },
+  resourceLook:function(albumId,type){
+    wx.request({
+      url: getApp().data.server+'/resourcesLog/look?rId='+ albumId+'&type='+type,
+      success:function(res){
+        console.log("埋点 sucess, albumId: "+albumId)
+      }
+    })
+  },
 
   previewImg:function(e){
     console.log(e);
+    this.resourceLook(e.target.dataset.rid,"RESOURCE")
       wx.previewImage({
         current:e.target.id,
-        urls: this.data.imageUrls
+        urls: this.data.imageUrls,
+
       })
 
   }
+
 })

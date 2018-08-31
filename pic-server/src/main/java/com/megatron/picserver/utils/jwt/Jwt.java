@@ -5,7 +5,6 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import net.minidev.json.JSONObject;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +32,8 @@ public class Jwt {
     
 	/**
 	 * 生成token，该方法只在用户登录成功后调用
-	 * 
-	 * @param Map集合，可以存储用户id，token生成时间，token过期时间等自定义字段
+	 *
+     * @param  payload Map集合，可以存储用户id，token生成时间，token过期时间等自定义字段
 	 * @return token字符串,若失败则返回null
 	 */
 	public static String createToken(Map<String, Object> payload) {
@@ -74,7 +73,7 @@ public class Jwt {
 				// 若payload包含ext字段，则校验是否过期
 				if (jsonOBj.containsKey("ext")) {
 					long extTime = Long.valueOf(jsonOBj.get("ext").toString());
-					long curTime = new Date().getTime();
+                    long curTime = System.currentTimeMillis();
 					// 过期了
 					if (curTime > extTime) {
 						resultMap.clear();

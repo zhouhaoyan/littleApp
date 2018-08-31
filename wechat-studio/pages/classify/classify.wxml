@@ -2,6 +2,6 @@
 <view class='classify_view'>
     <view class='classify_image_view' wx:for="{{classifyKey}}" wx:key="{{item}}">
       <image bindtap='toList' id='{{item.id}}' class='classify_image' src='{{item.url}}'> </image>
-      <text class='text-title'>{{item.name}}</text>
+      <text bindtap='toList' class='text-title'>{{item.name}}</text>
     </view>
 </view>
