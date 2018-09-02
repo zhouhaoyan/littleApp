@@ -1,10 +1,8 @@
 package com.megatron.picserver.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.megatron.picserver.dao.AlbumDao;
 import com.megatron.picserver.pojo.Album;
-import com.megatron.picserver.pojo.Resources;
 import com.megatron.picserver.service.AlbumService;
 import com.megatron.picserver.utils.Const;
 import com.megatron.picserver.utils.base.BaseDao;
@@ -13,6 +11,7 @@ import com.megatron.picserver.utils.base.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album,Long> implements Alb
     @Override
     public Album addAlbum(String name, String title, String description, String url, Integer isTop, Integer isBanner, Long classIfyId, List<String> lables, Long userId) {
         Album album= Album.builder().name(name).title(title).description(description).url(url).isTop(isTop)
-                .isBanner(isBanner).classifyId(classIfyId).lables(null).userId(1L).status(Const.STATUS_NORMAL).build();
+                .isBanner(isBanner).classifyId(classIfyId).lables(null).userId(1L).status(Const.STATUS_NORMAL).createTime(new Date()).updateTime(new Date()).build();
 
         this.getBaseDao().save(album);
 

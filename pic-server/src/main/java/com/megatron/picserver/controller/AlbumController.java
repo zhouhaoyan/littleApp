@@ -29,7 +29,7 @@ public class AlbumController {
             @RequestBody AlbumBean album
             ) {
 
-       Album entity= albumService.addAlbum(album.getName(),album.getTitle(),album.getDescription(),album.getImgUrls().get(0),album.getIsTop(),album.getIsBanner(),album.getClassifyId(),null,1L);
+        Album entity = albumService.addAlbum(album.getName(), album.getTitle(), album.getDescription(), album.getAlbumUrl(), album.getIsTop(), album.getIsBanner(), album.getClassifyId(), null, 1L);
         album.getImgUrls().stream().forEach(v->{
             resourcesService.add(entity.getId(),album.getTitle(), Const.IMAGE_TYPE,v,null,album.getDescription(),null,album.getClassifyId(),1L,Const.IS_TOP_OFF);
                 }
