@@ -7,7 +7,7 @@
       <view class="weui-cell__bd">
         <input class="weui-input" value='{{inputValue}}' placeholder="请输入相册名称" bindinput='bindName' />
       </view>
-          <!-- <view class="weui-cell__ft">
+      <!-- <view class="weui-cell__ft">
               <icon type="warn" size="23" color="#E64340"></icon>
           </view> -->
     </view>
@@ -40,47 +40,45 @@
     </view>
   </view>
   <!-- 是否banner -->
-        <view class="weui-cells__title">轮播图</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_switch">
-                <view class="weui-cell__bd">banner展示</view>
-                <view class="weui-cell__ft">
-                    <switch checked bindchange='bannerSwitch' />
-                </view>
-            </view>
-        </view>
+  <view class="weui-cells__title">轮播图</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">banner展示</view>
+      <view class="weui-cell__ft">
+        <switch checked bindchange='bannerSwitch' />
+      </view>
+    </view>
+  </view>
 
-          <!-- 是否top -->
-        <view class="weui-cells__title">推荐页</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_switch">
-                <view class="weui-cell__bd">首页列表展示</view>
-                <view class="weui-cell__ft">
-                    <switch checked  bindchange='topSwitch'/>
-                </view>
-            </view>
-        </view>
+  <!-- 是否top -->
+  <view class="weui-cells__title">推荐页</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">首页列表展示</view>
+      <view class="weui-cell__ft">
+        <switch checked bindchange='topSwitch' />
+      </view>
+    </view>
+  </view>
 
-        <view class="weui-cells__title">分类</view>
-        <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_switch">
+  <view class="weui-cells__title">分类</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
 
-            <view class="weui-cell__hd" style='width:100%' >
-                    <picker bindchange="bindPickerChange" value="{{classifyIndex}}" range="{{classifyList}}" range-key="name">
-                        <view class="picker">
-                          当前选择：{{classifyList[classifyIndex].name}}
-                        </view>
-                      </picker>
+      <view class="weui-cell__hd" style='width:100%'>
+        <picker bindchange="bindPickerChange" value="{{classifyIndex}}" range="{{classifyList}}" range-key="name">
+          <view class="picker">
+            当前选择：{{classifyList[classifyIndex].name}}
+          </view>
+        </picker>
 
-                </view>
-            </view>
-        </view>
-           
+      </view>
+    </view>
+  </view>
+
 
 
   <view class="page__bd">
-
-
     <view class="weui-cells">
       <view class="weui-cell">
         <view class="weui-cell__bd">
@@ -106,7 +104,37 @@
       </view>
     </view>
   </view>
+
+    <view class="page__bd">
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">封面上传</view>
+              <view class="weui-uploader__info">{{albumFiles.length}}/1</view>
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploadAlbumPic">
+                <block wx:for="{{albumFiles}}" wx:key="*this">
+                  <view class="weui-uploader__file_album" bindtap="previewAlbumImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseAlbumImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
 </view>
+
+
 <view class="weui-btn-area">
   <button class="weui-btn" type="primary" bindtap="addAlbum">提交</button>
 </view>

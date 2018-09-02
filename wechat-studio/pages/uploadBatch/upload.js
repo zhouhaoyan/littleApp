@@ -3,6 +3,7 @@ const qiniuUploader = require("../../utils/qiniuUploader");
 Page({
   data: {
     files: [],
+    albumFiles:[],
     imgUrls:[],
     progress:0,
     isBanner:1,
@@ -42,7 +43,13 @@ Page({
     });
   },
   chooseImage: function () {
-      var that=this;
+    var that = this;
+    console.log("length:" + that.data.files.length)
+    if (that.data.files.length>=9){
+      this.showAlert('最大上传9涨图片');
+      return false;
+    }
+     
     wx.chooseImage({
       count:9,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -61,14 +68,6 @@ Page({
        
           });
 
-          if (i == 0) {
-            console.log("index:"+i);
-            this.setData({
-              albumUrl: res.imageUR
-            }
-            )
-           
-          }
         }, (error) => {
           console.error('error: ' + JSON.stringify(error));
         },
@@ -93,6 +92,50 @@ Page({
       urls: this.data.files // 需要预览的图片http链接列表
     })
   },
+  chooseAlbumImage: function () {
+    var that = this;
+    if (that.data.albumFiles.length > 0) {
+      this.setData({
+        albumFiles: []
+      })
+    }
+   
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var filePathList = res.tempFilePaths;
+
+        for (var i = 0; i < filePathList.length; i++) {
+          // 交给七牛上传
+          console.log("index:" + i + " and path:" + filePathList[i]);
+          var filePath = filePathList[i];
+          qiniuUploader.upload(filePath, (res) => {
+            that.setData({
+              albumFiles: that.data.albumFiles.concat(res.imageURL),
+              albumUrl: res.imageURL
+
+            });
+
+   
+          }, (error) => {
+            console.error('error: ' + JSON.stringify(error));
+          },
+            null,// 可以使用上述参数，或者使用 null 作为参数占位符
+            (progress) => {
+              console.log('上传进度', progress.progress)
+              console.log('已经上传的数据长度', progress.totalBytesSent)
+              console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend)
+              that.setData({
+                progress: progress.progress
+              })
+            }
+          );
+        }
+      }
+    })
+  },
 
   addAlbum:function(){
     if (!this.addCheck()) return ;
@@ -109,7 +152,8 @@ Page({
         "imgUrls": this.data.imgUrls,
         "isBanner":this.data.isBanner,
         "isTop":this.data.isTop,
-        "studioToken":getApp().data.studioToken
+        "studioToken":getApp().data.studioToken,
+        "albumUrl": this.data.albumUrl
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -195,7 +239,9 @@ Page({
         progress: 0,
         isBanner: 1,
         isTop: 1,
-        inputValue: ''
+        inputValue: '',
+        albumUrl: '',
+        albumFiles: []
 
       })
   },
