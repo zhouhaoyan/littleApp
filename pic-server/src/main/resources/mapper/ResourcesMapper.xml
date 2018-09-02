@@ -19,10 +19,11 @@
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="lables" property="lables" jdbcType="VARCHAR" />
     <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="studio_token" property="studioToken" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, type, url, name, title, classify_id, view_num, enjoy_num, download_num, user_id, description,lables,
-    status, create_time, update_time ,is_top,album_id
+    status, create_time, update_time ,is_top,album_id,studio_token
   </sql>
 
   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -86,6 +87,9 @@
       <if test="lables != null" >
         lables,
       </if>
+      <if test="studioToken != null">
+        studio_token,
+      </if>
       <if test="isTop != null" >
         is_top,
       </if>
@@ -139,6 +143,9 @@
       <if test="lables != null" >
         #{lables,jdbcType=LONGVARCHAR},
       </if>
+      <if test="studioToken != null">
+        #{studioToken,jdbcType=VARCHAR},
+      </if>
       <if test="isTop != null" >
         #{isTop,jdbcType=INTEGER},
       </if>
@@ -191,6 +198,9 @@
       </if>
       <if test="lables != null" >
         lables = #{lables,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="studioToken != null">
+        studio_token = #{lables,jdbcType=LONGVARCHAR},
       </if>
       <if test="isTop != null" >
         is_top = #{isTop,jdbcType=LONGVARCHAR},

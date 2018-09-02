@@ -29,7 +29,7 @@ public class AlbumController {
             @RequestBody AlbumBean album
             ) {
 
-        Album entity = albumService.addAlbum(album.getName(), album.getTitle(), album.getDescription(), album.getAlbumUrl(), album.getIsTop(), album.getIsBanner(), album.getClassifyId(), null, 1L);
+        Album entity = albumService.addAlbum(album.getName(), album.getTitle(), album.getDescription(), album.getAlbumUrl(), album.getIsTop(), album.getIsBanner(), album.getClassifyId(), null, 1L, album.getStudioToken());
         album.getImgUrls().stream().forEach(v->{
             resourcesService.add(entity.getId(),album.getTitle(), Const.IMAGE_TYPE,v,null,album.getDescription(),null,album.getClassifyId(),1L,Const.IS_TOP_OFF);
                 }
@@ -41,17 +41,20 @@ public class AlbumController {
 
     @GetMapping("page/top")
     public Result albumTopList(@RequestParam(value = "pageSize") Integer pageSize,
-                            @RequestParam(value = "pageNo") Integer pageNo
+                               @RequestParam(value = "pageNo") Integer pageNo,
+                               @RequestParam(value = "studioToken") String studioToken
                             ){
 
-       return new Result(albumService.page(Const.STATUS_NORMAL,null,null,Const.IS_TOP_ON,pageSize,pageNo));
+        return new Result(albumService.page(Const.STATUS_NORMAL, null, null, Const.IS_TOP_ON, pageSize, pageNo, studioToken));
 
     }
 
     @GetMapping("list/banner")
-    public Result albumBannerList( ){
+    public Result albumBannerList(
+            @RequestParam(value = "studioToken") String studioToken
+    ) {
 
-        return new Result(albumService.list(Const.STATUS_NORMAL,null,Const.IS_BANNER_ON,null));
+        return new Result(albumService.list(Const.STATUS_NORMAL, null, Const.IS_BANNER_ON, null, studioToken));
 
     }
 
@@ -59,10 +62,11 @@ public class AlbumController {
     @GetMapping("page/classify")
     public Result albumTopList(@RequestParam(value = "pageSize") Integer pageSize,
                                @RequestParam(value = "pageNo") Integer pageNo,
-                               @RequestParam(value = "classifyId") Long classifyId
+                               @RequestParam(value = "classifyId") Long classifyId,
+                               @RequestParam(value = "studioToken") String studioToken
     ){
 
-        return new Result(albumService.page(Const.STATUS_NORMAL,classifyId,null,null,pageSize,pageNo));
+        return new Result(albumService.page(Const.STATUS_NORMAL, classifyId, null, null, pageSize, pageNo, studioToken));
 
     }
 

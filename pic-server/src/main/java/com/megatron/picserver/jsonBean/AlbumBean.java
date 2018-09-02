@@ -22,4 +22,6 @@ public class AlbumBean {
     private Integer isTop;
 
     private Long classifyId;
+
+    private String studioToken;
 }

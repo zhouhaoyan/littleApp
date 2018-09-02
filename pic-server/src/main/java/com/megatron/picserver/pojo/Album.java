@@ -5,13 +5,10 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import java.util.Date;
+
 @Data
 @Builder
 public class Album {
-    @Tolerate
-    public Album(){
-
-    }
     private Long id;
 
     private String name;
@@ -42,6 +39,11 @@ public class Album {
 
     private Date updateTime;
 
+    private String studioToken;
+
     private Integer status;
 
+    @Tolerate
+    public Album() {
+    }
 }

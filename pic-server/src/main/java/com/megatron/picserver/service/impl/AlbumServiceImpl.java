@@ -23,9 +23,9 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album,Long> implements Alb
 
 
     @Override
-    public Album addAlbum(String name, String title, String description, String url, Integer isTop, Integer isBanner, Long classIfyId, List<String> lables, Long userId) {
+    public Album addAlbum(String name, String title, String description, String url, Integer isTop, Integer isBanner, Long classIfyId, List<String> lables, Long userId, String studioToken) {
         Album album= Album.builder().name(name).title(title).description(description).url(url).isTop(isTop)
-                .isBanner(isBanner).classifyId(classIfyId).lables(null).userId(1L).status(Const.STATUS_NORMAL).createTime(new Date()).updateTime(new Date()).build();
+                .isBanner(isBanner).classifyId(classIfyId).lables(null).userId(1L).status(Const.STATUS_NORMAL).createTime(new Date()).updateTime(new Date()).studioToken(studioToken).build();
 
         this.getBaseDao().save(album);
 
@@ -44,12 +44,13 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album,Long> implements Alb
     }
 
     @Override
-    public PageBean<Album> page(Integer status, Long classifyId, Integer isBanner, Integer isTop,Integer pageSize,Integer pageNo) {
+    public PageBean<Album> page(Integer status, Long classifyId, Integer isBanner, Integer isTop, Integer pageSize, Integer pageNo, String studioToken) {
         Map<String, Object> param = new HashMap<>();
         param.put("status", status);
         param.put("classifyId", classifyId);
         param.put("isBanner", isBanner);
         param.put("isTop", isTop);
+        param.put("studioToken", studioToken);
         System.out.println(param.toString());
         PageHelper.startPage(pageNo, pageSize);
         List<Album> list= this.getBaseDao().findList(param);
@@ -58,12 +59,13 @@ public class AlbumServiceImpl extends BaseServiceImpl<Album,Long> implements Alb
     }
 
     @Override
-    public List<Album> list(Integer status, Long classifyId, Integer isBanner, Integer isTop) {
+    public List<Album> list(Integer status, Long classifyId, Integer isBanner, Integer isTop, String studioToken) {
         Map<String, Object> param = new HashMap<>();
         param.put("status", status);
         param.put("classifyId", classifyId);
         param.put("isBanner", isBanner);
         param.put("isTop", isTop);
+        param.put("studioToken", studioToken);
         System.out.println(param.toString());
 
         List<Album> list= this.getBaseDao().findList(param);

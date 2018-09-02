@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import java.util.Date;
+
 @Data
 @Builder
 public class Resources {
@@ -28,7 +29,13 @@ public class Resources {
 
     private Long userId;
 
+    private Long albumId;
+
+    private Integer isTop;
+
     private Integer status;
+
+    private String studioToken;
 
     private Date createTime;
 
@@ -38,10 +45,8 @@ public class Resources {
 
     private String lables;
 
-    private Integer isTop;
-
-    private Long albumId;
-
     @Tolerate
     public Resources(){}
+
+
 }

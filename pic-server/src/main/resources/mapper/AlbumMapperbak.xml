@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.megatron.picserver.dao.AlbumDao" >
+<mapper namespace="com.megatron.picserver.dao.AlbumDao1">
   <resultMap id="BaseResultMap" type="com.megatron.picserver.pojo.Album" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -17,12 +17,11 @@
     <result column="create_by" property="createBy" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="studio_token" property="studioToken" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, title, url, is_top, is_banner, user_id, classify_id, description, follow_num, 
-    view_num, lables, create_by, create_time, update_time, studio_token, status
+    view_num, lables, create_by, create_time, update_time, status
   </sql>
   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -35,7 +34,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="save" parameterType="com.megatron.picserver.pojo.Album" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="save" parameterType="com.megatron.picserver.pojo.Album" keyProperty="id" useGeneratedKeys="true" >
     insert into album
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -82,9 +81,6 @@
       </if>
       <if test="updateTime != null" >
         update_time,
-      </if>
-      <if test="studioToken != null" >
-        studio_token,
       </if>
       <if test="status != null" >
         status,
@@ -136,9 +132,6 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="studioToken != null" >
-        #{studioToken,jdbcType=VARCHAR},
-      </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
@@ -189,16 +182,12 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="studioToken != null" >
-        studio_token = #{studioToken,jdbcType=VARCHAR},
-      </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-
   <select id="findList" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -227,9 +216,5 @@
     <if test="status != null ">
       and status =#{status,jdbcType=INTEGER}
     </if>
-    <if test="studioToken != null ">
-      and studio_token =#{studioToken,jdbcType=VARCHAR}
-    </if>
   </sql>
-
 </mapper>
