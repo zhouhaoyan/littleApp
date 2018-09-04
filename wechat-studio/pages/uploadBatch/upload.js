@@ -95,6 +95,7 @@ Page({
   chooseAlbumImage: function () {
     var that = this;
     if (that.data.albumFiles.length > 0) {
+  
       this.setData({
         albumFiles: []
       })

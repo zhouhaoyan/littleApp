@@ -199,7 +199,7 @@ Page({
   },
   resourceLook:function(albumId,type){
     wx.request({
-      url: getApp().data.server+'/resourcesLog/look?rId='+ albumId+'&type='+type,
+      url: getApp().data.server + '/resourcesLog/look?studioToken='+getApp().data.studioToken+'&openId=' + getApp().globalData.openid+'&rId='+ albumId+'&type='+type,
       success:function(res){
         console.log("埋点 sucess, albumId: "+albumId)
       }

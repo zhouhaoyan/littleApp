@@ -77,7 +77,7 @@ Page({
   toList:function(e){
     console.log("classifyId:" + e.currentTarget.id);
     wx.navigateTo({
-      url: '/pages/list/list?classifyId=' + e.currentTarget.id
+      url: '/pages/list/list?classifyId=' + e.currentTarget.id + '&studioToken=' + getApp().data.studioToken
     })
   }
 })

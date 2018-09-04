@@ -3,7 +3,7 @@ App({
   data: {
   //server: "http://127.0.0.1:8080",
     server: "https://wechat.loglife.club",
-    studioToken:"c4ca4238a0b923820dcc509a6f75849b"
+    studioToken:"c4ca4238a0b923820dcc509a6f75849b",
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -81,4 +81,6 @@ App({
       }
     })
   }
-})
+}
+
+)
