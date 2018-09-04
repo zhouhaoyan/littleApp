@@ -45,8 +45,8 @@
 
 
         <!-- 配置表信息，每生成一张表，这里需要改变一次对应表名，若单次生成多张表，则需要配置多个<table>标签 -->
-        <table schema="megatron_pic" tableName="album"
-               domainObjectName="Album" enableCountByExample="false"
+        <table schema="megatron_pic" tableName="resource_log"
+               domainObjectName="resourceLog" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

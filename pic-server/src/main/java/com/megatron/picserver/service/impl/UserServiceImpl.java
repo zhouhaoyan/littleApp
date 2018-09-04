@@ -47,7 +47,7 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
                     this.singUp(openId,sessionKey);
         }
             // User u = User.builder().sessionKey(sessionKey).updateTime(new Date()).build();
-            User u = userList.get(0);
+        //User u = userList.get(0);
             // userDao.updateByOpenId(u);
             //记录登陆日志
         logger.info("openId：{} 登陆系统，添加登陆日志", openId);

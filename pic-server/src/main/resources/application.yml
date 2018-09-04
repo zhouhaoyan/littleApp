@@ -1,5 +1,10 @@
 server:
+  #  port: 443
   port: 8080
+#  ssl:
+#    key-store: classpath:214955751900154.pfx
+#    key-store-type: PKCS12
+#    key-store-password: 214955751900154
 
 #thymeleaf start
 spring:
@@ -8,7 +13,8 @@ spring:
 #thymeleaf end
   datasource:
        name: task
-       url: jdbc:mysql://127.0.0.1:3306/megatron_pic
+    #       url:
+       url:
        username:
        password:
        # 使用druid数据源
@@ -39,15 +45,25 @@ mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.megatron.picserver.pojo
 
+
+
+#在application.properties文件中引入日志配置文件
+#=====================================  log  =============================
+logging:
+  config: classpath:logback-boot.xml
+
+
 #IMAGE_PATH: D:\file\
 IMAGE_PATH: /data/temp
 
-file.server.path: oxllb2jb0.bkt.clouddn.com
+file.server.path:
 
 
 appId:
 
 secret:
+
+
 
 
 

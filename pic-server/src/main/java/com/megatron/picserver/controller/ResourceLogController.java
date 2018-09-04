@@ -28,9 +28,11 @@ public class ResourceLogController {
 
     @GetMapping(value = "look")
     public boolean updateUserInfo(@RequestParam(value = "rId") Long rId, @RequestParam(value = "type") String type,
-                                  @RequestParam(value = "openId", required = false) String openId) {
+                                  @RequestParam(value = "openId", required = false) String openId,
+                                  @RequestParam(value = "studioToken", required = false) String studioToken
+    ) {
 
-        return resourceLogService.addRecord(rId, type, openId);
+        return resourceLogService.addRecord(rId, type, openId, studioToken);
 
     }
 
