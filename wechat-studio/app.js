@@ -4,6 +4,7 @@ App({
   //server: "http://127.0.0.1:8080",
     server: "https://wechat.loglife.club",
     studioToken:"c4ca4238a0b923820dcc509a6f75849b",
+    version: "1.0.2",
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -53,7 +54,7 @@ App({
   getSessionKey: function (userCode) {
     var that=this;
     wx.request({
-      url: getApp().data.server+'/user/login?code=' + userCode,
+      url: getApp().data.server + '/user/login?studioToken='+getApp().data.studioToken+'&code=' + userCode + '&version=' + getApp().data.version,
       success: function (res) {
         console.log(res.data)
         that.globalData.openid = res.data.openid;

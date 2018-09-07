@@ -37,20 +37,20 @@ public class UserServiceImpl extends BaseServiceImpl<User,Long> implements UserS
     }
 
     @Override
-    public String singIn(String openId,String sessionKey) {
+    public String singIn(String openId, String sessionKey, String version) {
 
         Map<String,Object> param=new HashMap<>();
         param.put("openId",openId);
         List<User> userList=userDao.findList(param);
         if(userList.size()==0){
-            logger.info("新用户openId：{} 登陆系统，添加新用户", openId);
+            logger.info("新用户openId：{} 登陆系统，添加新用户,version;{}", openId, version);
                     this.singUp(openId,sessionKey);
         }
             // User u = User.builder().sessionKey(sessionKey).updateTime(new Date()).build();
         //User u = userList.get(0);
             // userDao.updateByOpenId(u);
             //记录登陆日志
-        logger.info("openId：{} 登陆系统，添加登陆日志", openId);
+        logger.info("openId：{} 登陆系统，添加登陆日志,version:{}", openId, version);
             userLogService.addLoginLog(openId, sessionKey);
 
 

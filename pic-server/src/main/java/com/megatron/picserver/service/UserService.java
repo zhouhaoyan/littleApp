@@ -2,7 +2,6 @@ package com.megatron.picserver.service;
 
 import com.megatron.picserver.pojo.User;
 import com.megatron.picserver.utils.base.BaseService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface UserService extends BaseService<User,Long> {
 
@@ -19,7 +18,7 @@ public interface UserService extends BaseService<User,Long> {
      * @param  openId
      * @return
      */
-    String singIn(String openId,String sessionKey);
+    String singIn(String openId, String sessionKey, String version);
 
     /**
      * 退出
